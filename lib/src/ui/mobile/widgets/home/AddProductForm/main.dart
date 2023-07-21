@@ -39,36 +39,39 @@ class _AddProductFormState extends State<AddProductForm> {
     return Form(
       key: _formKey,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
             child: TextFormField(
               controller: _quantityController,
               keyboardType: TextInputType.number,
+              style: const TextStyle(fontFamily: 'Quicksand'),
               decoration:
                   AppInputStyles.getInputDecoration('Quantidade', 'Quantidade'),
             ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 10),
           Expanded(
             child: TextFormField(
               controller: _nameController,
               keyboardType: TextInputType.text,
+              style: const TextStyle(fontFamily: 'Quicksand'),
               decoration: AppInputStyles.getInputDecoration('Nome', 'Nome'),
               validator: (value) => _textInputValidator(value),
             ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 10),
           Expanded(
             child: TextFormField(
               controller: _priceController,
               keyboardType: TextInputType.text,
+              style: const TextStyle(fontFamily: 'Quicksand'),
               decoration: AppInputStyles.getInputDecoration('Preço', 'Preço'),
               validator: (value) => _priceValidator(value),
             ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 10),
           Expanded(
             child: IconButton(
               onPressed: () {},

@@ -75,8 +75,8 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Ubuntu
+    - family: Quicksand
       fonts:
-        - asset: assets/fonts/Ubuntu-Regular.ttf
+        - asset: assets/fonts/Quicksand-Regular.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
