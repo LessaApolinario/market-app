@@ -46,6 +46,7 @@ class _AddProductFormState extends State<AddProductForm> {
             child: TextFormField(
               controller: _quantityController,
               keyboardType: TextInputType.number,
+              style: const TextStyle(fontFamily: 'Quicksand'),
               decoration:
                   AppInputStyles.getInputDecoration('Quantidade', 'Quantidade'),
             ),
@@ -55,6 +56,7 @@ class _AddProductFormState extends State<AddProductForm> {
             child: TextFormField(
               controller: _nameController,
               keyboardType: TextInputType.text,
+              style: const TextStyle(fontFamily: 'Quicksand'),
               decoration: AppInputStyles.getInputDecoration('Nome', 'Nome'),
               validator: (value) => _textInputValidator(value),
             ),
@@ -64,6 +66,7 @@ class _AddProductFormState extends State<AddProductForm> {
             child: TextFormField(
               controller: _priceController,
               keyboardType: TextInputType.text,
+              style: const TextStyle(fontFamily: 'Quicksand'),
               decoration: AppInputStyles.getInputDecoration('Preço', 'Preço'),
               validator: (value) => _priceValidator(value),
             ),

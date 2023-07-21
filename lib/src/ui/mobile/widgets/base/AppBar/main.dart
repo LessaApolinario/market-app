@@ -20,7 +20,10 @@ class _MainAppBarState extends State<MainAppBar> {
         children: [
           Icon(Icons.shopping_cart),
           SizedBox(width: 10),
-          Text('Lista de compras'),
+          Text(
+            'Lista de compras',
+            style: TextStyle(fontFamily: 'Quicksand'),
+          ),
         ],
       ),
     );
