@@ -39,7 +39,7 @@ class _AddProductFormState extends State<AddProductForm> {
     return Form(
       key: _formKey,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
@@ -51,7 +51,7 @@ class _AddProductFormState extends State<AddProductForm> {
                   AppInputStyles.getInputDecoration('Quantidade', 'Quantidade'),
             ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 10),
           Expanded(
             child: TextFormField(
               controller: _nameController,
@@ -61,7 +61,7 @@ class _AddProductFormState extends State<AddProductForm> {
               validator: (value) => _textInputValidator(value),
             ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 10),
           Expanded(
             child: TextFormField(
               controller: _priceController,
@@ -71,7 +71,7 @@ class _AddProductFormState extends State<AddProductForm> {
               validator: (value) => _priceValidator(value),
             ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 10),
           Expanded(
             child: IconButton(
               onPressed: () {},
