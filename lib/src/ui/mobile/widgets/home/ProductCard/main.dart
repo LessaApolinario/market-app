@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:m_lista/src/core/domain/models/product.dart';
+import 'package:m_lista/src/core/utils/prices.dart';
 import 'package:m_lista/src/ui/mobile/themes/global_colors.dart';
 
 class ProductCard extends StatefulWidget {
@@ -21,33 +22,55 @@ class _ProductCardState extends State<ProductCard> {
       shape: RoundedRectangleBorder(
         side: BorderSide(
           color: GlobalColors.primary.shade900,
-          width: 1,
+          width: 2,
         ),
         borderRadius: const BorderRadius.all(Radius.circular(16)),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(width: 5),
-          Text("Quantidade: ${widget.product.quantity}"),
-          const SizedBox(width: 5),
-          Text("Nome: ${widget.product.name}"),
-          const SizedBox(width: 5),
-          Text("Preço: ${widget.product.price}"),
-          const SizedBox(width: 5),
-          IconButton(
-            onPressed: () {},
-            style: IconButton.styleFrom(
-              backgroundColor: GlobalColors.primary.shade300,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Detalhes do produto:",
+              style: TextStyle(
+                color: GlobalColors.primary.shade900,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            icon: Icon(
-              Icons.delete_rounded,
-              size: 30,
-              color: GlobalColors.primary.shade900,
+            const SizedBox(height: 10),
+            Text("Quantidade: ${widget.product.quantity}"),
+            Text("Nome: ${widget.product.name}"),
+            Text("Preço: ${monetaryValueToString(widget.product.price ?? 0)}"),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: GlobalColors.primary.shade900,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: GlobalColors.primary.shade300,
+                    width: 2,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+                ),
+                minimumSize: const Size.fromHeight(50),
+              ),
+              onPressed: () {},
+              child: Text(
+                "Excluir produto",
+                style: TextStyle(
+                  color: GlobalColors.primary.shade300,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
