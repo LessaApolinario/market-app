@@ -26,7 +26,7 @@ class ProductSqliteRepository extends BaseSqliteRepository
   @override
   Future<FutureOr<void>> onCreate(Database db, int version) async {
     String sql =
-        "CREATE TABLE product(ID INTEGER PRIMARY KEY AUTOINCREMENT, quantity INTEGER, name VARCHAR(255), price VARCHAR(255));";
+        "CREATE TABLE product(ID INTEGER PRIMARY KEY AUTOINCREMENT, quantity INTEGER, name TEXT, price REAL);";
     await db.execute(sql);
   }
 
@@ -45,5 +45,18 @@ class ProductSqliteRepository extends BaseSqliteRepository
     }
 
     return false;
+  }
+
+  @override
+  Future<List<Product>> fetch() async {
+    List<Product> products = [];
+    Database database = await connect();
+    var productsAsMap = await database.query('product');
+
+    for (var productAsMap in productsAsMap) {
+      products.add(Product.fromJson(productAsMap));
+    }
+
+    return products;
   }
 }

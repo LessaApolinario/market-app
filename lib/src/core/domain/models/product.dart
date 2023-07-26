@@ -1,9 +1,9 @@
 class Product {
   int? _quantity;
   String? _name;
-  String? _price;
+  num? _price;
 
-  Product({int? quantity, String? name, String? price}) {
+  Product({int? quantity, String? name, num? price}) {
     if (quantity != null) {
       this._quantity = quantity;
     }
@@ -19,8 +19,8 @@ class Product {
   set quantity(int? quantity) => _quantity = quantity;
   String? get name => _name;
   set name(String? name) => _name = name;
-  String? get price => _price;
-  set price(String? price) => _price = price;
+  num? get price => _price;
+  set price(num? price) => _price = price;
 
   Product.fromJson(Map<String, dynamic> json) {
     _quantity = json['quantity'];

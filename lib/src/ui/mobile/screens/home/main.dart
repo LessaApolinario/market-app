@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:m_lista/src/core/domain/models/product.dart';
+import 'package:m_lista/src/ui/mobile/providers/product_provider.dart';
 import 'package:m_lista/src/ui/mobile/themes/global_colors.dart';
 import 'package:m_lista/src/ui/mobile/widgets/base/AppBar/main.dart';
 import 'package:m_lista/src/ui/mobile/widgets/home/AddProductForm/main.dart';
 import 'package:m_lista/src/ui/mobile/widgets/home/ProductCard/main.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -13,26 +14,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final _products = <Product>[
-    Product.fromJson({"quantity": 20, "name": "Tomate", "price": "26,90"}),
-    Product.fromJson({"quantity": 2, "name": "Cenoura", "price": "8,0"}),
-    Product.fromJson({"quantity": 4, "name": "Batata", "price": "9,0"}),
-    Product.fromJson({"quantity": 20, "name": "Tomate", "price": "26,90"}),
-    Product.fromJson({"quantity": 2, "name": "Cenoura", "price": "8,0"}),
-    Product.fromJson({"quantity": 4, "name": "Batata", "price": "9,0"}),
-    Product.fromJson({"quantity": 20, "name": "Tomate", "price": "26,90"}),
-    Product.fromJson({"quantity": 2, "name": "Cenoura", "price": "8,0"}),
-    Product.fromJson({"quantity": 4, "name": "Batata", "price": "9,0"}),
-    Product.fromJson({"quantity": 20, "name": "Tomate", "price": "26,90"}),
-    Product.fromJson({"quantity": 2, "name": "Cenoura", "price": "8,0"}),
-    Product.fromJson({"quantity": 4, "name": "Batata", "price": "9,0"}),
-    Product.fromJson({"quantity": 20, "name": "Tomate", "price": "26,90"}),
-    Product.fromJson({"quantity": 2, "name": "Cenoura", "price": "8,0"}),
-    Product.fromJson({"quantity": 4, "name": "Batata", "price": "9,0"})
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductProvider>(context);
+    final products = productProvider.products;
+
     return Scaffold(
       backgroundColor: GlobalColors.primary.shade200,
       appBar: const MainAppBar(),
@@ -45,10 +31,10 @@ class _HomeState extends State<Home> {
             const SizedBox(height: 10),
             Expanded(
               child: ListView.separated(
-                itemCount: _products.length,
+                itemCount: products.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  return ProductCard(product: _products[index]);
+                  return ProductCard(product: products[index]);
                 },
                 separatorBuilder: (context, index) {
                   return const SizedBox(height: 5);

@@ -11,6 +11,11 @@ class ProductService extends ProductUseCase {
 
   @override
   Future<bool> create(Product product) {
-    return this._adapter.create(product);
+    return _adapter.create(product);
+  }
+
+  @override
+  Future<List<Product>> fetch() {
+    return _adapter.fetch();
   }
 }
