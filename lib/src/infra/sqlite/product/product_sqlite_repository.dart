@@ -26,7 +26,7 @@ class ProductSqliteRepository extends BaseSqliteRepository
   @override
   Future<FutureOr<void>> onCreate(Database db, int version) async {
     String sql =
-        "CREATE TABLE product(ID INTEGER PRIMARY KEY AUTOINCREMENT, quantity INTEGER, name TEXT, price REAL);";
+        "CREATE TABLE product(id INTEGER PRIMARY KEY AUTOINCREMENT, quantity INTEGER, name TEXT, price REAL);";
     await db.execute(sql);
   }
 
@@ -44,6 +44,7 @@ class ProductSqliteRepository extends BaseSqliteRepository
       return true;
     }
 
+    await close();
     return false;
   }
 
@@ -57,6 +58,37 @@ class ProductSqliteRepository extends BaseSqliteRepository
       products.add(Product.fromJson(productAsMap));
     }
 
+    await close();
     return products;
+  }
+
+  @override
+  Future<bool> delete(int id) async {
+    Database database = await connect();
+    final productDeleted = await database.delete(
+      'product',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    if (productDeleted > 0) {
+      return true;
+    }
+
+    await close();
+    return false;
+  }
+
+  @override
+  Future<bool> deleteAll() async {
+    Database database = await connect();
+    final deletedProducts = await database.delete('product');
+
+    if (deletedProducts > 0) {
+      return true;
+    }
+
+    await close();
+    return false;
   }
 }

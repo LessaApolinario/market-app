@@ -67,15 +67,6 @@ class _AddProductFormState extends State<AddProductForm> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TextFormField(
-            controller: _quantityController,
-            keyboardType: TextInputType.number,
-            style: const TextStyle(fontFamily: 'Quicksand'),
-            decoration:
-                AppInputStyles.getInputDecoration('Quantidade', 'Quantidade'),
-            validator: (value) => _textInputValidator(value),
-          ),
-          const SizedBox(height: 10),
-          TextFormField(
             controller: _nameController,
             keyboardType: TextInputType.text,
             style: const TextStyle(fontFamily: 'Quicksand'),
@@ -83,12 +74,32 @@ class _AddProductFormState extends State<AddProductForm> {
             validator: (value) => _textInputValidator(value),
           ),
           const SizedBox(height: 10),
-          TextFormField(
-            controller: _priceController,
-            keyboardType: TextInputType.text,
-            style: const TextStyle(fontFamily: 'Quicksand'),
-            decoration: AppInputStyles.getInputDecoration('Preço', 'Preço'),
-            validator: (value) => _priceValidator(value),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: TextFormField(
+                  controller: _quantityController,
+                  keyboardType: TextInputType.number,
+                  style: const TextStyle(fontFamily: 'Quicksand'),
+                  decoration: AppInputStyles.getInputDecoration(
+                      'Quantidade', 'Quantidade'),
+                  validator: (value) => _textInputValidator(value),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: TextFormField(
+                  controller: _priceController,
+                  keyboardType: TextInputType.text,
+                  style: const TextStyle(fontFamily: 'Quicksand'),
+                  decoration:
+                      AppInputStyles.getInputDecoration('Preço', 'Preço'),
+                  validator: (value) => _priceValidator(value),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 10),
           ElevatedButton(

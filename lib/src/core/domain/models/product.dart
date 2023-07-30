@@ -1,9 +1,14 @@
 class Product {
+  int? _id;
   int? _quantity;
   String? _name;
   num? _price;
 
-  Product({int? quantity, String? name, num? price}) {
+  Product({int? id, int? quantity, String? name, num? price}) {
+    if (id != null) {
+      this._id = id;
+    }
+
     if (quantity != null) {
       this._quantity = quantity;
     }
@@ -15,6 +20,7 @@ class Product {
     }
   }
 
+  int? get id => _id;
   int? get quantity => _quantity;
   set quantity(int? quantity) => _quantity = quantity;
   String? get name => _name;
@@ -23,6 +29,7 @@ class Product {
   set price(num? price) => _price = price;
 
   Product.fromJson(Map<String, dynamic> json) {
+    _id = json['id'];
     _quantity = json['quantity'];
     _name = json['name'];
     _price = json['price'];
@@ -30,6 +37,7 @@ class Product {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this._id;
     data['quantity'] = this._quantity;
     data['name'] = this._name;
     data['price'] = this._price;
