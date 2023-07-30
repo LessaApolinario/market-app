@@ -69,7 +69,7 @@ class _HomeState extends State<Home> {
                   "Total: R\$ ${monetaryValueToString(total)}",
                   style: const TextStyle(
                     fontFamily: 'Quicksand',
-                    fontSize: 28,
+                    fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
                 );
@@ -78,6 +78,99 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _showDeleteAllConfirmationDialog(context);
+        },
+        backgroundColor: GlobalColors.primary.shade900,
+        child: Icon(
+          Icons.delete,
+          color: GlobalColors.primary.shade300,
+        ),
+      ),
+    );
+  }
+
+  void _showDeleteAllConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            "Remover todos os produtos?",
+            style: TextStyle(
+              color: GlobalColors.primary.shade900,
+              fontFamily: 'Quicksand',
+              fontSize: 18,
+            ),
+          ),
+          content: Text(
+            "Esta ação não pode ser desfeita.",
+            style: TextStyle(
+              color: GlobalColors.primary.shade900,
+              fontFamily: 'Quicksand',
+              fontSize: 16,
+            ),
+          ),
+          backgroundColor: GlobalColors.primary.shade300,
+          actions: [
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: GlobalColors.primary.shade300,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: GlobalColors.primary.shade900,
+                    width: 1,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                "Cancelar",
+                style: TextStyle(
+                  color: GlobalColors.primary.shade900,
+                  fontSize: 18,
+                  fontFamily: 'Quicksand',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: GlobalColors.primary.shade900,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: GlobalColors.primary.shade300,
+                    width: 1,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+                ),
+              ),
+              onPressed: () {
+                Provider.of<ProductProvider>(context, listen: false)
+                    .clearProducts();
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                "Confirmar",
+                style: TextStyle(
+                  color: GlobalColors.primary.shade300,
+                  fontSize: 18,
+                  fontFamily: 'Quicksand',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
