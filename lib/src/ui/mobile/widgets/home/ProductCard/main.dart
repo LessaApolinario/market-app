@@ -56,7 +56,12 @@ class _ProductCardState extends State<ProductCard> {
             const SizedBox(height: 10),
             Text("Quantidade: ${widget.product.quantity}"),
             Text("Nome: ${widget.product.name}"),
-            Text("Preço: ${monetaryValueToString(widget.product.price ?? 0)}"),
+            Text("Preço: ${monetaryValueToString(
+              calculateTotalPriceByQuantity(
+                widget.product.quantity ?? 0,
+                widget.product.price ?? 0,
+              ),
+            )}"),
             const SizedBox(height: 10),
             ElevatedButton(
               style: ElevatedButton.styleFrom(

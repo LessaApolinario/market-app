@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:m_lista/src/core/utils/prices.dart';
 import 'package:m_lista/src/ui/mobile/providers/product_provider.dart';
 import 'package:m_lista/src/ui/mobile/themes/global_colors.dart';
 import 'package:m_lista/src/ui/mobile/widgets/base/AppBar/main.dart';
@@ -61,13 +62,18 @@ class _HomeState extends State<Home> {
               ),
             ),
             const SizedBox(height: 10),
-            const Text(
-              "Total: R\$ 99,50",
-              style: TextStyle(
-                fontFamily: 'Quicksand',
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
+            Consumer<ProductProvider>(
+              builder: (context, productProvider, child) {
+                final total = productProvider.calculateTotalPrices();
+                return Text(
+                  "Total: R\$ ${monetaryValueToString(total)}",
+                  style: const TextStyle(
+                    fontFamily: 'Quicksand',
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                );
+              },
             ),
           ],
         ),
