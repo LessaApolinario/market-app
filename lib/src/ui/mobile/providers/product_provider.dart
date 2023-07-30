@@ -26,4 +26,22 @@ class ProductProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<void> deleteProduct(int id) async {
+    final productDeleted = await _useCase.delete(id);
+
+    if (productDeleted) {
+      await fetchProducts();
+      notifyListeners();
+    }
+  }
+
+  Future<void> clearProducts() async {
+    final deletedProducts = await _useCase.deleteAll();
+
+    if (deletedProducts) {
+      await fetchProducts();
+      notifyListeners();
+    }
+  }
 }

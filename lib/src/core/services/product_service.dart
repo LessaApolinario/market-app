@@ -18,4 +18,14 @@ class ProductService extends ProductUseCase {
   Future<List<Product>> fetch() {
     return _adapter.fetch();
   }
+
+  @override
+  Future<bool> delete(int id) {
+    return _adapter.delete(id);
+  }
+
+  @override
+  Future<bool> deleteAll() {
+    return _adapter.deleteAll();
+  }
 }

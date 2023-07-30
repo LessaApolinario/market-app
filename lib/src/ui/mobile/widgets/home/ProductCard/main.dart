@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:m_lista/src/core/domain/models/product.dart';
 import 'package:m_lista/src/core/utils/prices.dart';
+import 'package:m_lista/src/ui/mobile/providers/product_provider.dart';
 import 'package:m_lista/src/ui/mobile/themes/global_colors.dart';
+import 'package:provider/provider.dart';
 
 class ProductCard extends StatefulWidget {
   const ProductCard({required this.product, super.key});
@@ -13,8 +15,19 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
+  Future<void> _deleteProduct(ProductProvider provider) async {
+    final deleteProduct = provider.deleteProduct;
+    final id = widget.product.id;
+
+    if (id != null) {
+      await deleteProduct(id);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductProvider>(context);
+
     return Card(
       color: GlobalColors.primary.shade300,
       elevation: 3,
@@ -59,7 +72,9 @@ class _ProductCardState extends State<ProductCard> {
                 ),
                 minimumSize: const Size.fromHeight(50),
               ),
-              onPressed: () {},
+              onPressed: () async {
+                await _deleteProduct(productProvider);
+              },
               child: Text(
                 "Excluir produto",
                 style: TextStyle(

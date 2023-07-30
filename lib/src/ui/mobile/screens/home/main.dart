@@ -15,10 +15,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
-  Widget build(BuildContext context) {
-    final productProvider = Provider.of<ProductProvider>(context);
-    final products = productProvider.products;
+  void initState() {
+    super.initState();
+    Provider.of<ProductProvider>(context, listen: false).fetchProducts();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: GlobalColors.primary.shade200,
       appBar: const MainAppBar(),
@@ -30,14 +33,30 @@ class _HomeState extends State<Home> {
             const AddProductForm(),
             const SizedBox(height: 10),
             Expanded(
-              child: ListView.separated(
-                itemCount: products.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return ProductCard(product: products[index]);
-                },
-                separatorBuilder: (context, index) {
-                  return const SizedBox(height: 5);
+              child: Consumer<ProductProvider>(
+                builder: (context, productProvider, child) {
+                  final products = productProvider.products;
+
+                  if (products.isEmpty) {
+                    return Center(
+                      child: Text(
+                        "Nenhum produto disponível",
+                        style: TextStyle(
+                          color: GlobalColors.primary.shade900,
+                          fontSize: 20,
+                          fontFamily: 'Quicksand',
+                        ),
+                      ),
+                    );
+                  }
+
+                  return ListView.builder(
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      final product = products[index];
+                      return ProductCard(product: product);
+                    },
+                  );
                 },
               ),
             ),
