@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:m_lista/src/core/utils/prices.dart';
 import 'package:m_lista/src/ui/mobile/providers/product_provider.dart';
+import 'package:m_lista/src/ui/mobile/styles/app_button_styles.dart';
+import 'package:m_lista/src/ui/mobile/styles/app_text_styles.dart';
 import 'package:m_lista/src/ui/mobile/themes/global_colors.dart';
 import 'package:m_lista/src/ui/mobile/widgets/base/AppBar/main.dart';
 import 'package:m_lista/src/ui/mobile/widgets/home/AddProductForm/main.dart';
@@ -42,11 +44,7 @@ class _HomeState extends State<Home> {
                     return Center(
                       child: Text(
                         "Nenhum produto disponível",
-                        style: TextStyle(
-                          color: GlobalColors.primary.shade900,
-                          fontSize: 20,
-                          fontFamily: 'Quicksand',
-                        ),
+                        style: AppTextStyles.mediumText,
                       ),
                     );
                   }
@@ -66,12 +64,8 @@ class _HomeState extends State<Home> {
               builder: (context, productProvider, child) {
                 final total = productProvider.calculateTotalPrices();
                 return Text(
-                  "Total: R\$ ${monetaryValueToString(total)}",
-                  style: const TextStyle(
-                    fontFamily: 'Quicksand',
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  "Total: ${monetaryValueToString(total)}",
+                  style: AppTextStyles.largeBoldText,
                 );
               },
             ),
@@ -98,61 +92,26 @@ class _HomeState extends State<Home> {
         return AlertDialog(
           title: Text(
             "Remover todos os produtos?",
-            style: TextStyle(
-              color: GlobalColors.primary.shade900,
-              fontFamily: 'Quicksand',
-              fontSize: 18,
-            ),
+            style: AppTextStyles.baseText,
           ),
           content: Text(
             "Esta ação não pode ser desfeita.",
-            style: TextStyle(
-              color: GlobalColors.primary.shade900,
-              fontFamily: 'Quicksand',
-              fontSize: 16,
-            ),
+            style: AppTextStyles.smallText,
           ),
           backgroundColor: GlobalColors.primary.shade300,
           actions: [
             TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: GlobalColors.primary.shade300,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    color: GlobalColors.primary.shade900,
-                    width: 1,
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
-                ),
-              ),
+              style: AppButtonStyles.primaryTextButton,
               onPressed: () {
                 Navigator.of(context).pop();
               },
               child: Text(
                 "Cancelar",
-                style: TextStyle(
-                  color: GlobalColors.primary.shade900,
-                  fontSize: 18,
-                  fontFamily: 'Quicksand',
-                  fontWeight: FontWeight.bold,
-                ),
+                style: AppTextStyles.primaryBoldBaseText,
               ),
             ),
             TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: GlobalColors.primary.shade900,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    color: GlobalColors.primary.shade300,
-                    width: 1,
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
-                ),
-              ),
+              style: AppButtonStyles.secondaryTextButton,
               onPressed: () {
                 Provider.of<ProductProvider>(context, listen: false)
                     .clearProducts();
@@ -160,12 +119,7 @@ class _HomeState extends State<Home> {
               },
               child: Text(
                 "Confirmar",
-                style: TextStyle(
-                  color: GlobalColors.primary.shade300,
-                  fontSize: 18,
-                  fontFamily: 'Quicksand',
-                  fontWeight: FontWeight.bold,
-                ),
+                style: AppTextStyles.secondaryBoldBaseText,
               ),
             ),
           ],

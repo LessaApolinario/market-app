@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:m_lista/src/core/domain/models/product.dart';
 import 'package:m_lista/src/core/utils/prices.dart';
 import 'package:m_lista/src/ui/mobile/providers/product_provider.dart';
+import 'package:m_lista/src/ui/mobile/styles/app_button_styles.dart';
 import 'package:m_lista/src/ui/mobile/styles/app_input_styles.dart';
-import 'package:m_lista/src/ui/mobile/themes/global_colors.dart';
+import 'package:m_lista/src/ui/mobile/styles/app_text_styles.dart';
 import 'package:provider/provider.dart';
 
 class AddProductForm extends StatefulWidget {
@@ -69,7 +70,7 @@ class _AddProductFormState extends State<AddProductForm> {
           TextFormField(
             controller: _nameController,
             keyboardType: TextInputType.text,
-            style: const TextStyle(fontFamily: 'Quicksand'),
+            style: AppTextStyles.smallText,
             decoration: AppInputStyles.getInputDecoration('Nome', 'Nome'),
             validator: (value) => _textInputValidator(value),
           ),
@@ -82,7 +83,7 @@ class _AddProductFormState extends State<AddProductForm> {
                 child: TextFormField(
                   controller: _quantityController,
                   keyboardType: TextInputType.number,
-                  style: const TextStyle(fontFamily: 'Quicksand'),
+                  style: AppTextStyles.smallText,
                   decoration: AppInputStyles.getInputDecoration(
                       'Quantidade', 'Quantidade'),
                   validator: (value) => _textInputValidator(value),
@@ -93,7 +94,7 @@ class _AddProductFormState extends State<AddProductForm> {
                 child: TextFormField(
                   controller: _priceController,
                   keyboardType: TextInputType.text,
-                  style: const TextStyle(fontFamily: 'Quicksand'),
+                  style: AppTextStyles.smallText,
                   decoration:
                       AppInputStyles.getInputDecoration('Preço', 'Preço'),
                   validator: (value) => _priceValidator(value),
@@ -103,28 +104,13 @@ class _AddProductFormState extends State<AddProductForm> {
           ),
           const SizedBox(height: 10),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: GlobalColors.primary.shade900,
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  color: GlobalColors.primary.shade300,
-                  width: 2,
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(16)),
-              ),
-              minimumSize: const Size.fromHeight(50),
-            ),
+            style: AppButtonStyles.primaryElevatedButton,
             onPressed: () async {
               await _createProduct(productProvider);
             },
             child: Text(
               "Adicionar produto",
-              style: TextStyle(
-                color: GlobalColors.primary.shade300,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              style: AppTextStyles.secondaryMediumBoldText,
             ),
           ),
         ],
