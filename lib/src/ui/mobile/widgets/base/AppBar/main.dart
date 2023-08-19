@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:m_lista/src/ui/mobile/styles/app_text_styles.dart';
 
 class MainAppBar extends StatefulWidget implements PreferredSizeWidget {
   const MainAppBar({super.key});
@@ -14,15 +15,15 @@ class _MainAppBarState extends State<MainAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Row(
+      title: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.shopping_cart),
-          SizedBox(width: 10),
+          const Icon(Icons.shopping_cart),
+          const SizedBox(width: 10),
           Text(
             'Lista de compras',
-            style: TextStyle(fontFamily: 'Quicksand'),
+            style: AppTextStyles.secondaryMediumText,
           ),
         ],
       ),
